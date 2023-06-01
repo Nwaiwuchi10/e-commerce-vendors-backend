@@ -29,7 +29,7 @@ router.post(
 );
 router.get("/", async (req, res) => {
   try {
-    const vendorsClips = await vendorsClips.find({}).sort({ createdAt: -1 });
+    const vendorsClips = await vendorsClips.find({}).sort({ createdAt: -2 });
     // .populate("user", ["profilePicture", "username", "Verified", "isAdmin"]);
 
     res.status(200).json(vendorsClips);
