@@ -1,6 +1,6 @@
 const nodemailer = require("nodemailer");
-const order = require("../models/order");
-
+// const order = require("../models/order");
+const Order = require("../models/Order");
 const router = require("express").Router();
 const transporter = nodemailer.createTransport({
   service: "gmail",
@@ -15,7 +15,7 @@ router.post(
   async (req, res) => {
     try {
       //create new user
-      const newVendors = new order({
+      const newVendors = new Order({
         orderItems: req.body.orderItems,
         user: req.body.user,
         usersEmail: req.body.usersEmail,
@@ -55,7 +55,7 @@ router.post(
 
 router.get("/", async (req, res) => {
   try {
-    const orders = await order.find({}).sort({ createdAt: -1 });
+    const orders = await Order.find({}).sort({ createdAt: -1 });
     // .populate("user", ["profilePicture", "username", "Verified", "isAdmin"]);
 
     res.status(200).json(orders);
@@ -66,7 +66,7 @@ router.get("/", async (req, res) => {
 /////// to get music by id
 router.get("/:id", async (req, res) => {
   try {
-    const order = await order.findById(req.params.id);
+    const order = await Order.findById(req.params.id);
 
     res.status(200).json(order);
   } catch (err) {
