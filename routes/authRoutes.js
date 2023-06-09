@@ -47,6 +47,7 @@ router.post("/registers", async (req, res) => {
       }
     });
     res.status(200).json({
+      token: generateToken(user._id),
       _id: user._id,
       firstName: user.firstName,
       lastName: user.lastName,
